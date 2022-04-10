@@ -2,23 +2,25 @@ import requests
 from requests import session
 import yaml
 
+rs = session()
 
-def ttest_get():
+
+def t_get():
     with open("get.yaml", "r") as f:
         d = yaml.safe_load(f)
-        res = requests.request(d["method"], d["url"])
+        res = requests.request(**d)
     return res
 
 
-def ttest_post():
+def t_post():
     method = "get"
     url = "http://httpbin.org/get"
-    res = session().request(method, url)
+    res = rs.request(method, url)
     return res
 
 
 if __name__ == '__main__':
-    r = ttest_get()
+    r = t_get()
     print(r, f"{r=}, {type(r)=}")
     print(r.json())
 

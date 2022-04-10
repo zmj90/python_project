@@ -1,16 +1,26 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import logging
+from functools import wraps
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def time_test_date(*args):
+    def decorator_(test_func):
+        @wraps(test_func)
+        def wrapper():
+            logging.info(args[2])
+            logging.info(args[3])
+            d1 = {f"{args[0]}": args[2], f"{args[1]}": args[3]}
+            test_func(**d1)
+        return wrapper
+    return decorator_
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+n1, n2, n3, n4 = "a", "b", 123, 456
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+@time_test_date(n1, n2, n3, n4)
+def fun1(a, b):
+    print(a)
+    print(b)
+
+
+fun1()
