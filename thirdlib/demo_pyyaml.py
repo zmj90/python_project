@@ -12,10 +12,15 @@ class Hero:
             self.__class__.__name__, self.name, self.hp, self.sp)
 
 
-o = yaml.safe_load("""
+o = yaml.load("""
 !!python/object:__main__.Hero
 name: Welthyr Syxgon
 hp: 1200
 sp: 0
-""")
+""",
+              # yaml.BaseLoader)
+              # yaml.FullLoader)
+              # yaml.SafeLoader)
+yaml.Loader)
+# yaml.UnsafeLoader)
 print(o)
